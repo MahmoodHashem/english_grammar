@@ -58,6 +58,16 @@ flutter:
   # the material Icons class.
   uses-material-design: true
 
+  assets:
+    - asset/images/
+  fonts:
+    - family: Edu SA Beginner
+      fonts:
+        - asset: asset/fonts/EduSABeginner-VariableFont_wght.ttf
+    - family: Far.Andalus
+      fonts:
+         - asset: asset/fonts/Far_Andalus.ttf
+
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg
