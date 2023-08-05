@@ -111,11 +111,11 @@ class Home extends StatelessWidget {
           children: [
             Card(
               elevation: 5,
-              margin: EdgeInsets.only(left: 5,right: 5,bottom: 10),
+              margin: EdgeInsets.only(left: 5,right: 5,bottom: 7),
               child: Container(
-                height: 230,
+                height: 200,
                 width: double.infinity,
-                child: Image.asset('asset/images/wallpaper.jpg',
+                child: Image.asset('asset/images/wall.jpg',
                 fit: BoxFit.fill,),
               ),
             ),
