@@ -30,6 +30,10 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  material_design_icons_flutter: ^7.0.7296
+  step_progress_indicator: ^1.0.2
+  carousel_slider: ^4.2.1
+
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -60,6 +64,7 @@ flutter:
 
   assets:
     - asset/images/
+    - asset/files/tenses.json
   fonts:
     - family: Edu SA Beginner
       fonts:
@@ -67,7 +72,12 @@ flutter:
     - family: Far.Andalus
       fonts:
          - asset: asset/fonts/Far_Andalus.ttf
-
+    - family: Estedad regular
+      fonts:
+         - asset: asset/fonts/Estedad-V-A.ttf
+    - family: LEMON MILK Pro FTR Medium
+      fonts:
+          - asset: asset/fonts/Lemon-Milk-Pro-Medium.ttf
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg

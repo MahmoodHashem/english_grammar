@@ -1,0 +1,84 @@
+{
+    "tenses": [
+      {
+        "name": "Simple Present",
+        "structure": "Subject + Verb(s)/Predicate",
+        "examples": [
+          "I eat breakfast every day.",
+          "She speaks English fluently."
+        ]
+      },
+      {
+        "name": "Present Continuous",
+        "structure": "Subject + am/is/are + Verb-ing",
+        "examples": [
+          "They are playing football right now.",
+          "I am studying for my exams."
+        ]
+      },
+      {
+        "name": "Simple Past",
+        "structure": "Subject + Verb-ed/Irregular Verb",
+        "examples": [
+          "He visited his grandparents last weekend.",
+          "We went to the beach yesterday."
+        ]
+      },
+      {
+        "name": "Past Continuous",
+        "structure": "Subject + was/were + Verb-ing",
+        "examples": [
+          "She was reading a book while waiting for the bus.",
+          "They were watching a movie at that time."
+        ]
+      },
+      {
+        "name": "Present Perfect",
+        "structure": "Subject + has/have + Verb-ed",
+        "examples": [
+          "I have visited Paris twice.",
+          "She has already seen that movie."
+        ]
+      },
+      {
+        "name": "Present Perfect Continuous",
+        "structure": "Subject + has/have + been + Verb-ing",
+        "examples": [
+          "They have been studying English for three years.",
+          "We have been working hard on this project."
+        ]
+      },
+      {
+        "name": "Simple Future",
+        "structure": "Subject + will/shall + Verb",
+        "examples": [
+          "He will call you later.",
+          "We shall meet at the restaurant."
+        ]
+      },
+      {
+        "name": "Future Continuous",
+        "structure": "Subject + will/shall + be + Verb-ing",
+        "examples": [
+          "She will be swimming at the pool tomorrow.",
+          "They will be traveling to Europe next month."
+        ]
+      },
+      {
+        "name": "Future Perfect",
+        "structure": "Subject + will/shall + have + Verb-ed",
+        "examples": [
+          "He will have finished his work by tonight.",
+          "We shall have completed the project by next week."
+        ]
+      },
+      {
+        "name": "Future Perfect Continuous",
+        "structure": "Subject + will/shall + have + been + Verb-ing",
+        "examples": [
+          "They will have been waiting for hours when we arrive.",
+          "I shall have been practicing the piano for a long time by then."
+        ]
+      }
+    ]
+  }

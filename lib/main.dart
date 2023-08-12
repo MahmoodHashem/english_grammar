@@ -1,17 +1,14 @@
-import 'package:flutter/material.dart';
-import 'screens/home_screen.dart';
 
+import 'package:flutter/material.dart';
+import 'screens/splash_screen.dart';
+import 'screens/home_screen.dart';
+import 'test.dart';
 
 void main(){
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
     theme: ThemeData(
-      primaryColor: Colors.blueAccent,
-      fontFamily: 'Far.Andalus',
-      focusColor: Colors.blueAccent,
-      listTileTheme: ListTileThemeData(
-        selectedColor: Colors.blueAccent,
-      ),
+      fontFamily:  'Estedad regular'
     ),
     home: Home(),
   ));
