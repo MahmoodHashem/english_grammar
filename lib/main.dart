@@ -10,6 +10,6 @@ void main(){
     theme: ThemeData(
       fontFamily:  'Estedad regular'
     ),
-    home: Home(),
+    home: SplashScreen(),
   ));
 }

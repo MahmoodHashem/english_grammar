@@ -1,7 +1,9 @@
 
 
-import 'package:flutter/material.dart'; 
+import 'dart:html';
 
+import 'package:flutter/material.dart';
+import 'home_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -10,10 +12,44 @@ class SplashScreen extends StatefulWidget {
   State<SplashScreen> createState() => _SplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen> {
+class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderStateMixin{
+
+  _navigatetohome()async{
+    await Future.delayed(
+        Duration(seconds: 2));
+    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) =>Home() ));
+  }
+
+  AnimationController? controller;
+
+  @override
+  void initState() {
+    controller = AnimationController(
+        duration: Duration(seconds: 2),
+        vsync: this);
+   _navigatetohome();
+    super.initState();
+
+    controller!.forward();
+
+    controller!.addListener(() {
+      setState(() {
+
+      });
+    });
+
+  }
+
+@override
+  void dispose() {
+    controller!.dispose();
+    // TODO: implement dispose
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return  Scaffold(
       backgroundColor: Colors.white,
       body: Center(
         child: Column(
@@ -22,16 +58,16 @@ class _SplashScreenState extends State<SplashScreen> {
             Text('MGrammar', 
             style: TextStyle(
               fontSize: 40, 
-              color: Color.fromRGBO(13, 71, 161, 1.0),
+              color: Color.fromRGBO(13, 71, 161, 1.0).withOpacity(controller!.value),
               fontFamily: 'LEMON MILK Pro FTR Medium',
             ),
             ),
-            Text('اِم گرامر',
+            const Text('اِم گرامر',
             style: TextStyle(
               color: Colors.black,
               fontSize: 22,
             )),
-            Text('(مرجع معتبر گرامر زبان انگلیسی)' ,
+            const Text('(مرجع معتبر گرامر زبان انگلیسی)' ,
             style: TextStyle(
               fontSize: 16,
               color: Colors.black,

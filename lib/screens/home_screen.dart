@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:english_grammar/consts.dart';
-import 'package:step_progress_indicator/step_progress_indicator.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:english_grammar/factors/title.dart';
+import 'package:english_grammar/factors/home_list_contents.dart';
 
 
 class Home extends StatefulWidget {
@@ -13,476 +14,45 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
 
+  var slides = [
+    Levels(
+        colorOfContainer: Color(0xFFFF9800),
+        colorOfUnselectedProgress: Color(0xFFFFB74D),
+        title: 'A1',
+        subtitle:'سطح ابتدائی',
+        colorOfSubtitle: Color(0xFFAA3C00)),
+    Levels(
+        colorOfContainer: Color(0xFFF57C00),
+        colorOfUnselectedProgress: Color(0xFFFFB74D),
+        title: 'A2',
+        subtitle:'سطح ابتدائی',
+        colorOfSubtitle: Color(0xFFAA3C00),),
+    Levels(
+        colorOfContainer:Color(0xFF4CAF50),
+        colorOfUnselectedProgress:  Color(0xFF81C784),
+        title: 'B1',
+        subtitle:'سطح متوسط',
+        colorOfSubtitle: Color(0xFF0D5212),),
+    Levels(
+        colorOfContainer: Color(0xFF388E3C),
+        colorOfUnselectedProgress: Color(0xFF81C784),
+        title: 'B2',
+        subtitle:'سطح متوسط',
+        colorOfSubtitle: Color(0xFF0D5212),),
+    Levels(
+        colorOfContainer:const Color(0xFFF44336),
+        colorOfUnselectedProgress: const Color(0xFFE57373),
+        title: 'C1',
+        subtitle:'سطح پیشرفته',
+        colorOfSubtitle: Color(0xFF770202),),
+    Levels(
+        colorOfContainer: Color(0xFFD32F2F),
+        colorOfUnselectedProgress:  Color(0xFFE57373),
+        title: 'C2',
+        subtitle:'سطح پیشرفته',
+        colorOfSubtitle: Color(0xFF770202),),
 
-  List<Widget> slides = [
-    Stack(
-      alignment: Alignment.bottomRight,
-      children: [
-        Container(
-          margin: const EdgeInsets.symmetric(horizontal: 10),
-          decoration: BoxDecoration(
-            color: myOrangeColor,
-            borderRadius: BorderRadius.circular(16),
-          ),
-          height: 200,
-        ),
-        Center(
-          child: Stack(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 16, bottom: 8),
-                child: CircularStepProgressIndicator(
-                  circularDirection: CircularDirection.counterclockwise,
-                  totalSteps: 100,
-                  currentStep: 50,
-                  stepSize: 20,
-                  selectedColor: Colors.white,
-                  unselectedColor: const Color(0xFFFFB74D),
-                  padding: 0,
-                  width: 180,
-                  height: 180,
-                  roundedCap: (_, __) => true,
-                ),
-              ),
-              const Positioned(
-                left: 55,
-                top: 40,
-                child: Text('A1',
-                  style: TextStyle(
-                    fontSize: 56,
-                    fontFamily: "LEMON MILK Pro FTR Medium",
-                    color: Colors.white,
-                    fontWeight: FontWeight.w700,
-                  ),
-                ),),
-              const Positioned(
-                  left: 55,
-                  top: 120,
-                  child: Text('زمان باقیمانده',
-                    textDirection: TextDirection.rtl,
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: Colors.white,
-                    ),
-                  )),
-              const Positioned(
-                  left: 47,
-                  top: 140,
-                  child: Text('5 ساعت و 12 دقیقه',
-                    textDirection: TextDirection.rtl,
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: Colors.white,
-                    ),
-                  )),
-            ],
-          ),
-        ),
-
-        const Positioned(
-          right: 30,
-          bottom: 20,
-          child: Text('سطح ابتدائی',
-            style: TextStyle(
-              color: Color(0xFFAA3C00),
-              fontSize: 16,
-              fontWeight: FontWeight.w700,
-
-            ),
-          ),
-        )
-      ],
-    ),
-    Stack(
-      alignment: Alignment.bottomRight,
-      children: [
-        Container(
-          margin: const EdgeInsets.symmetric(horizontal: 16),
-          decoration: BoxDecoration(
-            color: const Color(0xFFF57C00),
-            borderRadius: BorderRadius.circular(16),
-          ),
-          height: 200,
-        ),
-        Center(
-          child: Stack(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 16, bottom: 8),
-                child: CircularStepProgressIndicator(
-                  circularDirection: CircularDirection.counterclockwise,
-                  totalSteps: 100,
-                  currentStep: 50,
-                  stepSize: 20,
-                  selectedColor: Colors.white,
-                  unselectedColor: const Color(0xFFFFB74D),
-                  padding: 0,
-                  width: 180,
-                  height: 180,
-                  roundedCap: (_, __) => true,
-                ),
-              ),
-              const Positioned(
-                left: 55,
-                top: 40,
-                child: Text('A2',
-                  style: TextStyle(
-                    fontSize: 56,
-                    fontFamily: "LEMON MILK Pro FTR Medium",
-                    color: Colors.white,
-                    fontWeight: FontWeight.w700,
-                  ),
-                ),),
-              const Positioned(
-                  left: 55,
-                  top: 120,
-                  child: Text('زمان باقیمانده',
-                    textDirection: TextDirection.rtl,
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: Colors.white,
-                    ),
-                  )),
-              const Positioned(
-                  left: 47,
-                  top: 140,
-                  child: Text('5 ساعت و 12 دقیقه',
-                    textDirection: TextDirection.rtl,
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: Colors.white,
-                    ),
-                  )),
-            ],
-          ),
-        ),
-
-        const Positioned(
-          right: 30,
-          bottom: 20,
-          child: Text('سطح ابتدائی',
-            style: TextStyle(
-              color: Color(0xFFAA3C00),
-              fontSize: 16,
-              fontWeight: FontWeight.w700,
-
-            ),
-          ),
-        )
-      ],
-    ),
-    Stack(
-      alignment: Alignment.bottomRight,
-      children: [
-        Container(
-          margin: const EdgeInsets.symmetric(horizontal: 16),
-          decoration: BoxDecoration(
-            color: const Color(0xFF4CAF50),
-            borderRadius: BorderRadius.circular(16),
-          ),
-          height: 200,
-        ),
-        Center(
-          child: Stack(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 16, bottom: 8),
-                child: CircularStepProgressIndicator(
-                  circularDirection: CircularDirection.counterclockwise,
-                  totalSteps: 100,
-                  currentStep: 50,
-                  stepSize: 20,
-                  selectedColor: Colors.white,
-                  unselectedColor: const Color(0xFF81C784),
-                  padding: 0,
-                  width: 180,
-                  height: 180,
-                  roundedCap: (_, __) => true,
-                ),
-              ),
-              const Positioned(
-                left: 55,
-                top: 40,
-                child: Text('B1',
-                  style: TextStyle(
-                    fontSize: 56,
-                    fontFamily: "LEMON MILK Pro FTR Medium",
-                    color: Colors.white,
-                    fontWeight: FontWeight.w700,
-                  ),
-                ),),
-              const Positioned(
-                  left: 55,
-                  top: 120,
-                  child: Text('زمان باقیمانده',
-                    textDirection: TextDirection.rtl,
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: Colors.white,
-                    ),
-                  )),
-              const Positioned(
-                  left: 47,
-                  top: 140,
-                  child: Text('5 ساعت و 12 دقیقه',
-                    textDirection: TextDirection.rtl,
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: Colors.white,
-                    ),
-                  )),
-            ],
-          ),
-        ),
-
-        const Positioned(
-          right: 30,
-          bottom: 20,
-          child: Text('سطح متوسط',
-            style: TextStyle(
-              color: Color(0xFF0D5212),
-              fontSize: 16,
-              fontWeight: FontWeight.w700,
-
-            ),
-          ),
-        )
-      ],
-    ),
-    Stack(
-      alignment: Alignment.bottomRight,
-      children: [
-        Container(
-          margin: const EdgeInsets.symmetric(horizontal: 16),
-          decoration: BoxDecoration(
-            color: const Color(0xFF388E3C),
-            borderRadius: BorderRadius.circular(16),
-          ),
-          height: 200,
-        ),
-        Center(
-          child: Stack(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 16, bottom: 8),
-                child: CircularStepProgressIndicator(
-                  circularDirection: CircularDirection.counterclockwise,
-                  totalSteps: 100,
-                  currentStep: 50,
-                  stepSize: 20,
-                  selectedColor: Colors.white,
-                  unselectedColor: const Color(0xFF81C784),
-                  padding: 0,
-                  width: 180,
-                  height: 180,
-                  roundedCap: (_, __) => true,
-                ),
-              ),
-              const Positioned(
-                left: 55,
-                top: 40,
-                child: Text('B2',
-                  style: TextStyle(
-                    fontSize: 56,
-                    fontFamily: "LEMON MILK Pro FTR Medium",
-                    color: Colors.white,
-                    fontWeight: FontWeight.w700,
-                  ),
-                ),),
-              const Positioned(
-                  left: 55,
-                  top: 120,
-                  child: Text('زمان باقیمانده',
-                    textDirection: TextDirection.rtl,
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: Colors.white,
-                    ),
-                  )),
-              const Positioned(
-                  left: 47,
-                  top: 140,
-                  child: Text('5 ساعت و 12 دقیقه',
-                    textDirection: TextDirection.rtl,
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: Colors.white,
-                    ),
-                  )),
-            ],
-          ),
-        ),
-
-        const Positioned(
-          right: 30,
-          bottom: 20,
-          child: Text('سطح متوسط',
-            style: TextStyle(
-              color: Color(0xFF0D5212),
-              fontSize: 16,
-              fontWeight: FontWeight.w700,
-
-            ),
-          ),
-        )
-      ],
-    ),
-    Stack(
-      alignment: Alignment.bottomRight,
-      children: [
-        Container(
-          margin: const EdgeInsets.symmetric(horizontal: 16),
-          decoration: BoxDecoration(
-            color: const Color(0xFFF44336),
-            borderRadius: BorderRadius.circular(16),
-          ),
-          height: 200,
-        ),
-        Center(
-          child: Stack(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 16, bottom: 8),
-                child: CircularStepProgressIndicator(
-                  circularDirection: CircularDirection.counterclockwise,
-                  totalSteps: 100,
-                  currentStep: 50,
-                  stepSize: 20,
-                  selectedColor: Colors.white,
-                  unselectedColor: const Color(0xFFE57373),
-                  padding: 0,
-                  width: 180,
-                  height: 180,
-                  roundedCap: (_, __) => true,
-                ),
-              ),
-              const Positioned(
-                left: 55,
-                top: 40,
-                child: Text('C1',
-                  style: TextStyle(
-                    fontSize: 56,
-                    fontFamily: "LEMON MILK Pro FTR Medium",
-                    color: Colors.white,
-                    fontWeight: FontWeight.w700,
-                  ),
-                ),),
-              const Positioned(
-                  left: 55,
-                  top: 120,
-                  child: Text('زمان باقیمانده',
-                    textDirection: TextDirection.rtl,
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: Colors.white,
-                    ),
-                  )),
-              const Positioned(
-                  left: 47,
-                  top: 140,
-                  child: Text('5 ساعت و 12 دقیقه',
-                    textDirection: TextDirection.rtl,
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: Colors.white,
-                    ),
-                  )),
-            ],
-          ),
-        ),
-
-        const Positioned(
-          right: 30,
-          bottom: 20,
-          child: Text('سطح پیشرفته',
-            style: TextStyle(
-              color: Color(0xFF770202),
-              fontSize: 16,
-              fontWeight: FontWeight.w700,
-
-            ),
-          ),
-        )
-      ],
-    ),
-    Stack(
-      alignment: Alignment.bottomRight,
-      children: [
-        Container(
-          margin: const EdgeInsets.symmetric(horizontal: 16),
-          decoration: BoxDecoration(
-            color: const Color(0xFFD32F2F),
-            borderRadius: BorderRadius.circular(16),
-          ),
-          height: 200,
-        ),
-        Center(
-          child: Stack(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 16, bottom: 8),
-                child: CircularStepProgressIndicator(
-                  circularDirection: CircularDirection.counterclockwise,
-                  totalSteps: 100,
-                  currentStep: 50,
-                  stepSize: 20,
-                  selectedColor: Colors.white,
-                  unselectedColor: const Color(0xFFE57373),
-                  padding: 0,
-                  width: 180,
-                  height: 180,
-                  roundedCap: (_, __) => true,
-                ),
-              ),
-              const Positioned(
-                left: 55,
-                top: 40,
-                child: Text('C2',
-                  style: TextStyle(
-                    fontSize: 56,
-                    fontFamily: "LEMON MILK Pro FTR Medium",
-                    color: Colors.white,
-                    fontWeight: FontWeight.w700,
-                  ),
-                ),),
-              const Positioned(
-                  left: 55,
-                  top: 120,
-                  child: Text('زمان باقیمانده',
-                    textDirection: TextDirection.rtl,
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: Colors.white,
-                    ),
-                  )),
-              const Positioned(
-                  left: 47,
-                  top: 140,
-                  child: Text('5 ساعت و 12 دقیقه',
-                    textDirection: TextDirection.rtl,
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: Colors.white,
-                    ),
-                  )),
-            ],
-          ),
-        ),
-
-        const Positioned(
-          right: 30,
-          bottom: 20,
-          child: Text(' سطح پیشرفته  ',
-            style: TextStyle(
-              color: Color(0xFF770202),
-              fontSize: 16,
-              fontWeight: FontWeight.w700,
-
-            ),
-          ),
-        )
-      ],
-    ),];
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -532,7 +102,7 @@ class _HomeState extends State<Home> {
                 borderRadius: BorderRadius.circular(16),
               ),
               height: 80,
-              child: Contents(
+              child: HomeListTileContents(
                 needProgress: false,
                 title: 'نوت های من',
                 icon: Icons.edit_outlined,
@@ -547,7 +117,7 @@ class _HomeState extends State<Home> {
                 borderRadius: BorderRadius.circular(16),
               ),
               height: 80,
-              child: Contents(
+              child: HomeListTileContents(
                 title: '      تمرین ها',
                 icon: Icons.edit_note
               ),
@@ -561,7 +131,7 @@ class _HomeState extends State<Home> {
                 borderRadius: BorderRadius.circular(16),
               ),
               height: 80,
-              child: Contents(
+              child: HomeListTileContents(
                 title: 'تست های پایانی',
                 icon: Icons.assignment,
               ),
@@ -573,67 +143,7 @@ class _HomeState extends State<Home> {
   }
 }
 
-class Contents extends StatefulWidget {
-  Contents({
-    Key? key,
-    this.title,
-    this.icon,
-    this.needProgress = true,
-  });
 
-  final title;
-  final icon;
-  bool needProgress;
 
-  @override
-  State<Contents> createState() => _ContentsState();
-}
-
-class _ContentsState extends State<Contents> {
-
-  int step = 0;
-
-    Widget progress(){
-      if(widget.needProgress == true){
-        return CircularStepProgressIndicator(
-          totalSteps: 25,
-          currentStep: 10,
-          stepSize: 7,
-          selectedColor: Colors.white,
-          unselectedColor: Colors.grey,
-          padding: 0,
-          width: 30,
-          height: 30,
-          roundedCap: (_, __) => true,
-        );
-      }else{
-        return const SizedBox(width: 20,);
-      }
-    }
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: [
-        progress(),
-        Icon(widget.icon,
-          color: Colors.white30,
-          size: 48,),
-        const Flexible(
-          child: SizedBox(
-            width: 40,
-          ),
-        ),
-        Text(widget.title,
-        style: const TextStyle(
-          color: Colors.white,
-          fontSize: 20,
-          fontWeight: FontWeight.w700,
-        ),)
-      ],
-    );
-  }
-}
 
 
