@@ -3,6 +3,7 @@ import 'package:english_grammar/consts.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:english_grammar/factors/title.dart';
 import 'package:english_grammar/factors/home_list_contents.dart';
+import 'lesson_screen.dart';
 
 
 class Home extends StatefulWidget {
@@ -13,6 +14,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+
 
   var slides = [
     Levels(
@@ -57,6 +59,7 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         shadowColor: const Color.fromRGBO(0,0, 0, 0.5),
         backgroundColor: Colors.white,
