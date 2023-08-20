@@ -3,9 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:english_grammar/factors/title.dart';
 import 'package:english_grammar/test.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
+import 'package:english_grammar/lessons/a1.dart';
 
 class Lessons extends StatefulWidget {
-   Lessons({Key? key,
+   const Lessons({Key? key,
      required this.colorOfContainer,
      required this.colorOfUnselectedProgress,
      required this.title,
@@ -93,12 +94,12 @@ List<String> c2Subs = ['اشکال مختلف فعل','used to, be used to','ک�
           backgroundColor: Colors.white,
           leading: IconButton(onPressed: (){
             Navigator.pop(context);
-          }, icon: Icon(Icons.arrow_back), color: Colors.blue),
-          actions: [IconButton(onPressed: (){}, icon: Icon(Icons.alarm), color: Colors.blue,)],
+          }, icon: const Icon(Icons.arrow_back), color: Colors.blue),
+          actions: [IconButton(onPressed: (){}, icon: const Icon(Icons.alarm), color: Colors.blue,)],
           title: Align(
               alignment: Alignment.centerRight,
               child: Text("${widget.title} ${widget.subtitle} ",
-                style: TextStyle(
+                style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   color: Colors.black,
                 ),
@@ -128,24 +129,24 @@ List<String> c2Subs = ['اشکال مختلف فعل','used to, be used to','ک�
                         padding: const EdgeInsets.symmetric(horizontal: 14,vertical: 7),
                         child: ListTile(
                           onTap: (){
-                            //Navigator.push(context, MaterialPageRoute(builder: (c) => Test()));
+                            Navigator.push(context, MaterialPageRoute(builder: (c) => A1()));
 
-                            Alert(
-                              context: context,
-                              type: AlertType.warning,
-                              title: "درس قفل است",
-                              desc: "ابتدا درس قبلی را تکمیل نمائید",
-                              buttons: [
-                                DialogButton(
-                                  child: Text(
-                                    "باشه",
-                                    style: TextStyle(color: Colors.white, fontSize: 20),
-                                  ),
-                                  onPressed: () => Navigator.pop(context),
-                                  width: 120,
-                                )
-                              ],
-                            ).show();
+                            // Alert(
+                            //   context: context,
+                            //   type: AlertType.warning,
+                            //   title: "درس قفل است",
+                            //   desc: "ابتدا درس قبلی را تکمیل نمائید",
+                            //   buttons: [
+                            //     DialogButton(
+                            //       onPressed: () => Navigator.pop(context),
+                            //       width: 120,
+                            //       child: const Text(
+                            //         "باشه",
+                            //         style: TextStyle(color: Colors.white, fontSize: 20),
+                            //       ),
+                            //     )
+                            //   ],
+                            // ).show();
 
                           },
                           shape: RoundedRectangleBorder(
@@ -156,7 +157,7 @@ List<String> c2Subs = ['اشکال مختلف فعل','used to, be used to','ک�
                               alignment: Alignment.centerRight,
                               child: Text('درس ${lessons[i]}',
                                 textDirection: TextDirection.rtl,
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontSize: 20,
                                   color: Colors.black,
                                   fontWeight: FontWeight.bold,
@@ -165,15 +166,18 @@ List<String> c2Subs = ['اشکال مختلف فعل','used to, be used to','ک�
                           subtitle: Align(
                             alignment: Alignment.bottomRight,
                             child: Text(subtitlesList()[i],
-                              style: TextStyle(
+                              style: const TextStyle(
                                 color: Colors.black,
                               ),
                             ),
                           ),
                           tileColor: Colors.transparent,
-                          leading: Radio(value: true,
+                          leading: Radio(
+                            value: true,
                             groupValue:true ,
-                            onChanged: (value){},
+                            onChanged: (value){
+
+                            },
                             activeColor: widget.colorOfTile, ),
                         ),
                       );

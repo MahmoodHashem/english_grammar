@@ -4,15 +4,21 @@ import 'screens/splash_screen.dart';
 import 'screens/home_screen.dart';
 import 'test.dart';
 import 'package:countdown_progress_indicator/countdown_progress_indicator.dart';
-
-
-void main(){
+import 'package:english_grammar/screens/note_screen.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'Note.dart';
+import 'boxes.dart';
+void main()async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await Hive.initFlutter();
+  Hive.registerAdapter(NoteAdapter());
+  noteBoxes = await Hive.openBox<Note>('noteBox');
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
     theme: ThemeData(
       fontFamily:  'Estedad regular'
     ),
-    home:Home(),
+    home:SplashScreen(),
   ));
 }
 
