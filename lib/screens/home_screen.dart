@@ -1,3 +1,4 @@
+import 'package:english_grammar/screens/dictionary_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:english_grammar/consts.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -6,6 +7,8 @@ import 'package:english_grammar/factors/home_list_contents.dart';
 import 'lesson_screen.dart';
 import 'note_screen.dart';
 import 'package:english_grammar/lessons/a1.dart';
+import 'package:english_grammar/test.dart';
+import 'package:english_grammar/screens/practic_screen.dart';
 
 
 class Home extends StatefulWidget {
@@ -55,7 +58,6 @@ class _HomeState extends State<Home> {
         title: 'C2',
         subtitle:'سطح پیشرفته',
         colorOfSubtitle: const Color(0xFF770202),),
-
   ];
 
   List pageNo = [0,1,2,3,4,5];
@@ -71,7 +73,7 @@ class _HomeState extends State<Home> {
       endDrawer: Drawer(
         backgroundColor: Colors.transparent,
         child: Container(
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             borderRadius: BorderRadius.only(topLeft: Radius.circular(16), bottomLeft: Radius.circular(16)),
             color: Colors.white,
           ),
@@ -85,9 +87,9 @@ class _HomeState extends State<Home> {
                 },
                     icon:Icon(Icons.close, color: Colors.blue.shade800,) ),
               ),
-              Container(
+               Container(
                 height: 200,
-                child: Center(
+                child: const Center(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -98,12 +100,12 @@ class _HomeState extends State<Home> {
                           fontFamily: 'LEMON MILK Pro FTR Medium',
                         ),
                       ),
-                      const Text('اِم گرامر',
+                       Text('اِم گرامر',
                           style: TextStyle(
                             color: Colors.black,
                             fontSize: 18,
                           )),
-                      const Text('(مرجع معتبر گرامر زبان انگلیسی)' ,
+                       Text('(مرجع معتبر گرامر زبان انگلیسی)' ,
                         style: TextStyle(
                           fontSize: 13,
                           color: Colors.black,
@@ -114,13 +116,13 @@ class _HomeState extends State<Home> {
               ),
              ListTile(
                onTap: (){
-
+                        Navigator.push(context, MaterialPageRoute(builder: (c) => const Dictionary()));
                },
                focusColor: Colors.grey,
                hoverColor: Colors.grey,
                selectedTileColor: Colors.grey,
-               contentPadding: EdgeInsets.only(left: 50, right: 50),
-               title: Align(
+               contentPadding: const EdgeInsets.only(left: 50, right: 50),
+               title: const Align(
                  alignment: Alignment.centerRight,
                  child: Text("دیکشنری",
                  style: TextStyle(
@@ -134,8 +136,8 @@ class _HomeState extends State<Home> {
              ),
              ListTile(
                onTap: (){},
-               contentPadding: EdgeInsets.only(left: 50, right: 50),
-               title: Align(
+               contentPadding: const EdgeInsets.only(left: 50, right: 50),
+               title: const Align(
                  alignment: Alignment.centerRight,
                  child: Text("تنظیمات",
                    style: TextStyle(
@@ -150,8 +152,8 @@ class _HomeState extends State<Home> {
              ListTile(
                tileColor: Colors.blue,
                onTap: (){},
-               contentPadding: EdgeInsets.only(left: 50, right: 50),
-               title: Align(
+               contentPadding: const EdgeInsets.only(left: 50, right: 50),
+               title: const Align(
                  alignment: Alignment.centerRight,
                  child: Text("درباره",
                    style: TextStyle(
@@ -167,7 +169,7 @@ class _HomeState extends State<Home> {
         ),
       ),
       appBar: AppBar(
-          iconTheme: IconThemeData(color: Color.fromRGBO(13, 71, 161, 1.0),),
+          iconTheme: const IconThemeData(color: Color.fromRGBO(13, 71, 161, 1.0),),
         shadowColor: const Color.fromRGBO(0,0, 0, 0.5),
         backgroundColor: Colors.white,
         title: const Text('MGrammar',
@@ -218,7 +220,7 @@ class _HomeState extends State<Home> {
                     margin: const EdgeInsets.all(2),
                     child: Icon(Icons.circle,
                     size: 15,
-                      color: activePage == i? colorsOfIndicator[i]:Colors.grey
+                        color: activePage == i? colorsOfIndicator[i]:Colors.grey
                     ),
                   )),
             ),
@@ -227,7 +229,7 @@ class _HomeState extends State<Home> {
             ),
             GestureDetector(
               onTap: (){
-                Navigator.push(context, MaterialPageRoute(builder: (c) => Notes()));
+                Navigator.push(context, MaterialPageRoute(builder: (c) => const Notes()));
               },
               child: Container(
                 decoration: BoxDecoration(
@@ -245,15 +247,20 @@ class _HomeState extends State<Home> {
             const SizedBox(
               height: 10,
             ),
-            Container(
-              decoration: BoxDecoration(
-                color: myOrangeColor,
-                borderRadius: BorderRadius.circular(16),
-              ),
-              height: 80,
-              child: HomeListTileContents(
-                title: '      تمرین ها',
-                icon: Icons.edit_note
+            GestureDetector(
+              onTap: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context) => Practice() ));
+              },
+              child: Container(
+                decoration: BoxDecoration(
+                  color: myOrangeColor,
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                height: 80,
+                child: HomeListTileContents(
+                  title: '      تمرین ها',
+                  icon: Icons.edit_note
+                ),
               ),
             ),
             const SizedBox(

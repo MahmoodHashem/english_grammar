@@ -39,6 +39,9 @@ dependencies:
   hive: ^2.2.3
   hive_flutter: ^1.1.0
   flutter_quill: ^7.4.1
+  translator: ^0.1.7
+  provider: ^6.0.5
+  flutter_svg: ^2.0.7
 
 
 

@@ -4,9 +4,14 @@ import 'package:english_grammar/factors/title.dart';
 import 'package:english_grammar/test.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:english_grammar/lessons/a1.dart';
+import 'package:provider/provider.dart';
+import 'package:english_grammar/models/progress_provider.dart';
+import 'package:english_grammar/screens/practic_screen.dart';
 
 class Lessons extends StatefulWidget {
-   const Lessons({Key? key,
+
+
+  Lessons({Key? key,
      required this.colorOfContainer,
      required this.colorOfUnselectedProgress,
      required this.title,
@@ -18,7 +23,7 @@ class Lessons extends StatefulWidget {
 
    final Color colorOfContainer;
    final Color colorOfUnselectedProgress;
-   final String title;
+   final String  title;
    final String subtitle;
    final Color colorOfSubtitle;
    final Color colorOfTile;
@@ -30,8 +35,10 @@ class Lessons extends StatefulWidget {
 
 class _LessonsState extends State<Lessons> {
 
-  var lessons = ['اول','دوم','سوم','چهارم','پنجم','ششم','هفتم','هشتم','نهم','دهم','یازدهم','دوازدهم',
+
+   var lessons = ['اول','دوم','سوم','چهارم','', 'پنجم','ششم','هفتم','','هشتم','نهم','دهم','','یازدهم','دوازدهم','',
     'سیزدهم','چهاردهم','پانزدهم','شانزدهم','هفدهم ','هجدهم','نوزدهم','بیستم',];
+
 
 List<String> a1Subs = ['کلمه و انواع آن ','کاربر حروف تعریف نامعین a و an','آوا','حرف تعریف معین the','ضمیر',
   'صفت','ترتیب صفات ','صفات مقایسوی','قید','فعل و اشکال آن ','انواع قید','جملات شرطی','سوالیه شرطی','زمان حال ساده', 'زمان گذشته ساده'];
@@ -67,6 +74,17 @@ List<String> c2Subs = ['اشکال مختلف فعل','used to, be used to','ک�
     }
 
   }
+
+  bool isChecked = false;
+
+  void changeValue(value){
+   setState(() {
+        isChecked = !isChecked;
+
+   });
+  }
+
+
   int lenghtOfSubtitleList(){
     var title = widget.title;
 
@@ -82,6 +100,182 @@ List<String> c2Subs = ['اشکال مختلف فعل','used to, be used to','ک�
     }
 
   }
+
+
+int numberOfTest(int index){
+   switch(index){
+     case 4: return 1;
+     case 8: return 2; 
+     case 12: return 3; 
+     case 16: return 4; 
+     case 20: return 5; 
+     default: 
+       return 6;
+   }
+  }
+  
+  Widget listTile(BuildContext context, int index){
+   if(index == 4 || index == 8 || index == 12 || index == 16 || index == 20){
+     return ListTile(
+       onTap: (){
+
+        if(Provider.of<Progress>(context, listen: false).boolList[index]) {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => Practice()));
+        }else{
+         Alert(
+           context: context,
+           type: AlertType.warning,
+           title: "درس قفل است",
+           desc: "ابتدا تست قبلی را تکمیل نمائید",
+           buttons: [
+             DialogButton(
+               onPressed: () => Navigator.pop(context),
+               width: 120,
+               child: const Text(
+                 "باشه",
+                 style: TextStyle(color: Colors.white, fontSize: 20),
+               ),
+             )
+           ],
+         ).show();
+        }
+
+       },
+       shape: RoundedRectangleBorder(
+         borderRadius: BorderRadius.circular(16),
+       ),
+       title: Align(
+           alignment: Alignment.centerRight,
+           child: Text('تست #${numberOfTest(index)}',
+             textDirection: TextDirection.rtl,
+             style: const TextStyle(
+               fontSize: 20,
+               color: Colors.black,
+               fontWeight: FontWeight.bold,
+             ),
+           )),
+       tileColor: Colors.orange.shade300,
+       leading: Radio(
+           value: true,
+           groupValue:false,
+           onChanged: (value){
+           },
+           activeColor: Colors.orange),
+       subtitle: Text(''),
+     );
+   }
+   else if(index == lenghtOfSubtitleList() - 1){
+     return ListTile(
+       onTap: (){
+         if(Provider.of<Progress>(context, listen: false).boolList[index]) {
+           Navigator.push(
+               context, MaterialPageRoute(builder: (context) => Practice()));
+         }else{
+           Alert(
+             context: context,
+             type: AlertType.warning,
+             title: "درس قفل است",
+             desc: "ابتدا تست های  قبلی را تکمیل نمائید",
+             buttons: [
+               DialogButton(
+                 onPressed: () => Navigator.pop(context),
+                 width: 120,
+                 child: const Text(
+                   "باشه",
+                   style: TextStyle(color: Colors.white, fontSize: 20),
+                 ),
+               )
+             ],
+           ).show();
+         }
+
+       },
+       shape: RoundedRectangleBorder(
+         borderRadius: BorderRadius.circular(16),
+       ),
+       title: Align(
+           alignment: Alignment.centerRight,
+           child: Text('تست آخر ',
+             textDirection: TextDirection.rtl,
+             style: const TextStyle(
+               fontSize: 20,
+               color: Colors.black,
+               fontWeight: FontWeight.bold,
+             ),
+           )),
+       tileColor: Colors.orange.shade300,
+       leading: Radio(
+           value: true,
+           groupValue:false,
+           onChanged: (value){
+           },
+           activeColor: Colors.orange),
+       subtitle: Text(''),
+     );
+   }
+   else{
+     return ListTile(
+       onTap: (){
+         if(Provider.of<Progress>(context, listen: false).boolList[index]){
+             Navigator.push(context, MaterialPageRoute(builder: (c) =>
+                    A1(value: isChecked,changeValue: changeValue,)));
+         }else{
+           Alert(
+             context: context,
+             type: AlertType.warning,
+             title: "درس قفل است",
+             desc: "ابتدا درس قبلی را تکمیل نمائید",
+             buttons: [
+               DialogButton(
+                 onPressed: () => Navigator.pop(context),
+                 width: 120,
+                 child: const Text(
+                   "باشه",
+                   style: TextStyle(color: Colors.white, fontSize: 20),
+                 ),
+               )
+             ],
+           ).show();
+
+         }
+
+       },
+       focusColor: Colors.blue,
+       shape: RoundedRectangleBorder(
+         side: BorderSide(color: widget.colorOfTile,  width:1),
+         borderRadius: BorderRadius.circular(16),
+       ),
+       title: Align(
+           alignment: Alignment.centerRight,
+           child: Text('درس ${lessons[index]}',
+             textDirection: TextDirection.rtl,
+             style: const TextStyle(
+               fontSize: 20,
+               color: Colors.black,
+               fontWeight: FontWeight.bold,
+             ),
+           )),
+       subtitle: Align(
+         alignment: Alignment.bottomRight,
+         child: Text(subtitlesList()[index],
+           style: const TextStyle(
+             color: Colors.black,
+           ),
+         ),
+       ),
+       tileColor: Colors.transparent,
+       leading: Radio(
+         value: true,
+         groupValue:Provider.of<Progress>(context).boolList[index],
+         onChanged: (value){},
+         activeColor: widget.colorOfTile, ),
+     );
+   }
+  }
+
+
+  bool condition = true;
 
 
 
@@ -107,81 +301,27 @@ List<String> c2Subs = ['اشکال مختلف فعل','used to, be used to','ک�
           )
       ),
       body: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.only(left: 8,right: 8,bottom: 8),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Card(
-              elevation: 0,
-              child: Levels(
-                  colorOfContainer: widget.colorOfContainer,
-                  colorOfUnselectedProgress: widget.colorOfUnselectedProgress,
-                  title: widget.title,
-                  subtitle: widget.subtitle,
-                  colorOfSubtitle: widget.colorOfSubtitle,
-                  isNavigatable: false),
-            ),
+            Levels(
+                colorOfContainer: widget.colorOfContainer,
+                colorOfUnselectedProgress: widget.colorOfUnselectedProgress,
+                title: widget.title,
+                subtitle: widget.subtitle,
+                colorOfSubtitle: widget.colorOfSubtitle,
+                isNavigatable: false),
             Expanded(
+              child: Container(
                 child: ListView.builder(
                     itemCount: lenghtOfSubtitleList(),
                     itemBuilder: (c,i){
                       return Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 14,vertical: 7),
-                        child: ListTile(
-                          onTap: (){
-                            Navigator.push(context, MaterialPageRoute(builder: (c) => A1()));
-
-                            // Alert(
-                            //   context: context,
-                            //   type: AlertType.warning,
-                            //   title: "درس قفل است",
-                            //   desc: "ابتدا درس قبلی را تکمیل نمائید",
-                            //   buttons: [
-                            //     DialogButton(
-                            //       onPressed: () => Navigator.pop(context),
-                            //       width: 120,
-                            //       child: const Text(
-                            //         "باشه",
-                            //         style: TextStyle(color: Colors.white, fontSize: 20),
-                            //       ),
-                            //     )
-                            //   ],
-                            // ).show();
-
-                          },
-                          shape: RoundedRectangleBorder(
-                            side: BorderSide(color: widget.colorOfTile,  width:1),
-                            borderRadius: BorderRadius.circular(16),
-                          ),
-                          title: Align(
-                              alignment: Alignment.centerRight,
-                              child: Text('درس ${lessons[i]}',
-                                textDirection: TextDirection.rtl,
-                                style: const TextStyle(
-                                  fontSize: 20,
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              )),
-                          subtitle: Align(
-                            alignment: Alignment.bottomRight,
-                            child: Text(subtitlesList()[i],
-                              style: const TextStyle(
-                                color: Colors.black,
-                              ),
-                            ),
-                          ),
-                          tileColor: Colors.transparent,
-                          leading: Radio(
-                            value: true,
-                            groupValue:true ,
-                            onChanged: (value){
-
-                            },
-                            activeColor: widget.colorOfTile, ),
-                        ),
+                        child: listTile(context, i),
                       );
-                    })
+                    }),
+              ),
             )
           ],
         ),

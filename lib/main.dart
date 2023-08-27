@@ -1,100 +1,89 @@
 
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
-import 'screens/splash_screen.dart';
-import 'screens/home_screen.dart';
-import 'test.dart';
-import 'package:countdown_progress_indicator/countdown_progress_indicator.dart';
-import 'package:english_grammar/screens/note_screen.dart';
+import 'package:english_grammar/models/progress_provider.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'Note.dart';
 import 'boxes.dart';
+import 'package:english_grammar/screens/dictionary_screen.dart';
+import 'package:english_grammar/screens/home_screen.dart';
+import 'package:provider/provider.dart';
+import 'package:english_grammar/models/answers_provider.dart';
+import 'package:english_grammar/models/note_data.dart';
+
+
 void main()async{
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
   Hive.registerAdapter(NoteAdapter());
   noteBoxes = await Hive.openBox<Note>('noteBox');
-  runApp(MaterialApp(
-    debugShowCheckedModeBanner: false,
-    theme: ThemeData(
-      fontFamily:  'Estedad regular'
-    ),
-    home:SplashScreen(),
-  ));
+  runApp(MyApp());
 }
 
-
-
-class MyApp extends StatefulWidget {
+class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
   @override
-  _MyAppState createState() => _MyAppState();
+  Widget build(BuildContext context) {
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+            create: (context) => Progress(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => Answer(),
+        ),
+    ChangeNotifierProvider(
+    create: (context) =>NoteData(),
+    ),
+      ],
+      child:  MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+            fontFamily:  'Estedad regular'
+        ),
+        home:Home(),
+      ),
+    );
+  }
 }
 
-class _MyAppState extends State<MyApp> {
-  bool _isRunning = true;
-  final _controller = CountDownController();
-  final _controller2 = CountDownController();
+class App extends StatefulWidget {
+  const App({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        body: Container(
-          color: Colors.white,
-          child: Center(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                SizedBox(
-                  height: 200,
-                  width: 200,
-                  child: CountDownProgressIndicator(
-                    controller: _controller,
-                    valueColor: Colors.red,
-                    backgroundColor: Colors.blue,
-                    initialPosition: 0,
-                    duration: 365,
-                    timeFormatter: (seconds) {
-                      return Duration(seconds: seconds)
-                          .toString()
-                          .split('.')[0]
-                          .padLeft(8, '0');
-                    },
-                    text: 'hh:mm:ss',
-                    onComplete: () => null,
-                  ),
-                ),
-                const SizedBox(height: 20),
-                SizedBox(
-                  height: 200,
-                  width: 200,
-                  child: CountDownProgressIndicator(
-                    controller: _controller2,
-                    valueColor: Colors.red,
-                    backgroundColor: Colors.blue,
-                    initialPosition: 0,
-                    duration: 365,
-                    text: 'Seg',
-                    onComplete: () => null,
-                  ),
-                ),
-                const SizedBox(height: 20),
-                ElevatedButton(
-                  onPressed: () => setState(() {
-                    if (_isRunning) {
-                      _controller.pause();
-                      _controller2.pause();
-                    } else {
-                      _controller.resume();
-                      _controller2.resume();
-                    }
+  State<App> createState() => _AppState();
+}
 
-                    _isRunning = !_isRunning;
-                  }),
-                  child: Text(_isRunning ? 'Pause' : 'Resume'),
+class _AppState extends State<App> {
+  Color color = Colors.transparent;
+  @override
+  Widget build(BuildContext context) {
+
+    return Scaffold(
+      body: Center(
+        child: GestureDetector(
+          onTap: (){
+            setState(() {
+              color = color == Colors.transparent ? Colors.blue.shade800 : Colors.transparent;
+            });
+          },
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Container(
+              height: 50,
+              decoration: BoxDecoration(
+                color: color,
+                borderRadius: BorderRadius.circular(30),
+                border: Border.all(
+                  color: Colors.blue.shade800,
+                  width: 2,
                 )
-              ],
+              ),
+              child: Center(
+                child: Text('blank'),
+              ),
             ),
           ),
         ),
@@ -102,3 +91,4 @@ class _MyAppState extends State<MyApp> {
     );
   }
 }
+

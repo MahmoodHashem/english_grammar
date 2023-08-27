@@ -1,19 +1,27 @@
 import 'dart:math';
+import 'package:english_grammar/screens/lesson_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:step_progress_indicator/step_progress_indicator.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/services.dart';
+import 'package:english_grammar/test.dart';
+import 'package:english_grammar/models/progress_provider.dart';
+import 'package:provider/provider.dart';
 
 class A1 extends StatefulWidget {
-  const A1({Key? key}) : super(key: key);
+   A1({Key? key, required this.value, required this.changeValue}) : super(key: key);
 
   @override
   State<A1> createState() => _A1State();
+
+    bool value;
+    Function changeValue;
+
 }
 
 class _A1State extends State<A1> {
 
-  void _customContextMenu(BuildContext context,
+ void _customContextMenu(BuildContext context,
       Function cutCallback,
       Function copyCallback) {
     showModalBottomSheet<void>(
@@ -39,10 +47,6 @@ class _A1State extends State<A1> {
       },
     );
   }
-
-
-
-
 
   List texts = [
     SelectableText(
@@ -151,17 +155,15 @@ The Quranقرآن کریم , the  bibleانجیل , …..
       textDirection: TextDirection.rtl,
     ),
   ];
-
   int i = 0;
-
   int _step = 0;
 
   Widget backButton() {
-    if (_step < 0) {
+    if (_step < 1) {
       return SizedBox(
         width: 30,
       );
-    } else {
+    } else if(_step >= 1 && _step < 5) {
       return  ElevatedButton(
         onPressed: (){
           setState(() {
@@ -206,6 +208,108 @@ The Quranقرآن کریم , the  bibleانجیل , …..
             backgroundColor: MaterialStatePropertyAll(Color(0xFF0D47A1))
         ),
       );
+    }else{
+      return ElevatedButton(onPressed: (){
+        setState(() {if (_step > 1) {
+        i++;
+        _step++;
+      }});},
+        child: Container(
+          child: Center(
+              child: Align(
+                alignment: Alignment.topCenter,
+                child: Text('تمرین',
+                  style: TextStyle(
+                    fontSize: 25,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              )),
+          height: 40,
+          width: 150,
+        ),
+        style: ButtonStyle(
+            shape: MaterialStatePropertyAll(RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
+            ),
+            ),
+            backgroundColor: MaterialStatePropertyAll(Color(0xFF0D47A1))
+        ),
+      );
+    }
+  }
+  Widget upButton(){
+    if(_step < 5){
+      return ElevatedButton(onPressed: (){setState(() {if (_step < 5 ) {
+        i++;
+        _step++;
+      }});},
+        child: Container(
+          child: Center(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    width: 40,
+                  ),
+                  Align(
+                    alignment: Alignment.topCenter,
+                    child: Text('بعدی',
+                      style: TextStyle(
+                        fontSize: 25,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 20,
+                  ),
+                  Icon(Icons.arrow_forward),
+                ],
+              )),
+          height: 40,
+          width: 150,
+        ),
+        style: ButtonStyle(
+            shape: MaterialStatePropertyAll(RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
+            ),
+            ),
+            backgroundColor: MaterialStatePropertyAll(Color(0xFF0D47A1))
+        ),
+      );
+    }else{
+      return ElevatedButton(
+        onPressed: (){
+                  Provider.of<Progress>(context, listen: false).increment();
+                  Provider.of<Progress>(context, listen: false).decrementTime();
+                  Provider.of<Progress>(context, listen: false).updateBoolList();
+                 // print(Provider.of<Progress>(context, listen: false).hr);
+                  //print(Provider.of<Progress>(context, listen: false).min);
+          Navigator.pop(context);
+        },
+        child: Container(
+          child: Center(
+              child: Align(
+                alignment: Alignment.topCenter,
+                child: Text('درس بعدی',
+                  style: TextStyle(
+                    fontSize: 25,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              )),
+          height: 40,
+          width: 150,
+        ),
+        style: ButtonStyle(
+            shape: MaterialStatePropertyAll(RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
+            ),
+            ),
+            backgroundColor: MaterialStatePropertyAll(Color(0xFF0D47A1))
+        ),
+      );
     }
   }
 
@@ -226,7 +330,7 @@ The Quranقرآن کریم , the  bibleانجیل , …..
         backgroundColor: Colors.white,
         leading: IconButton(onPressed: () {
           Navigator.pop(context);
-        }, icon: Icon(Icons.arrow_back, color: Colors.blue,)),
+        }, icon: Icon(Icons.arrow_back, color: Colors.blue.shade800,)),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
@@ -244,18 +348,15 @@ The Quranقرآن کریم , the  bibleانجیل , …..
             Expanded(
               child: ListView(
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Card(
-                      child: GestureDetector(
-                        onTap: (){
-                          print("Hello world");
-                        },
-                        child: Container(
-                          child: Align(
-                            alignment: Alignment.centerRight,
-                            child: texts[i],
-                          ),
+                  Card(
+                    child: GestureDetector(
+                      onTap: (){
+                        print("Hello world");
+                      },
+                      child: Container(
+                        child: Align(
+                          alignment: Alignment.centerRight,
+                          child: texts[i],
                         ),
                       ),
                     ),
@@ -271,49 +372,7 @@ The Quranقرآن کریم , the  bibleانجیل , …..
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             backButton(),
-            ElevatedButton(onPressed: (){
-              setState(() {
-                if (_step < 5 ) {
-                  i++;
-                  _step++;
-                }
-
-              });
-
-            }, child: Container(
-              child: Center(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      SizedBox(
-                        width: 40,
-                      ),
-                      Align(
-                        alignment: Alignment.topCenter,
-                        child: Text('بعدی',
-                          style: TextStyle(
-                            fontSize: 25,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(
-                        width: 20,
-                      ),
-                      Icon(Icons.arrow_forward),
-                    ],
-                  )),
-              height: 40,
-              width: 150,
-            ),
-              style: ButtonStyle(
-                  shape: MaterialStatePropertyAll(RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  ),
-                  backgroundColor: MaterialStatePropertyAll(Color(0xFF0D47A1))
-              ),
-            ),
+            upButton(),
 
           ],
         ),

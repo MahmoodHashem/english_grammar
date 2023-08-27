@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'add_note_screen.dart';
+import 'package:provider/provider.dart';
+import 'package:english_grammar/models/note_data.dart';
 
 
 class Notes extends StatefulWidget {
@@ -54,7 +57,7 @@ That a sugar. (اشتباه)
           )
       ),
       body: ListView.builder(
-        itemCount: 4,
+        itemCount: Provider.of<NoteData>(context).notes.length,
           itemBuilder: (b,i){
             return Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
@@ -91,7 +94,7 @@ That a sugar. (اشتباه)
                             padding: const EdgeInsets.all(8.0),
                             child: Align(
                               alignment: Alignment.topRight,
-                              child: Text('حروف تعریف',
+                              child: Text( Provider.of<NoteData>(context).notes[i].title,
                                 maxLines: 1,
                                 style: TextStyle(
                                   color: Colors.blue.shade800,
@@ -105,7 +108,7 @@ That a sugar. (اشتباه)
                             padding: const EdgeInsets.symmetric(horizontal: 10),
                             child: Align(
                               alignment: Alignment.centerRight,
-                              child: Text(text,
+                              child: Text(Provider.of<NoteData>(context).notes[i].details,
                                 maxLines: _maxLines,
                                 overflow: TextOverflow.fade,
                                 style: TextStyle(
@@ -125,6 +128,7 @@ That a sugar. (اشتباه)
                           child: IconButton(
                               onPressed: (){
                                 setState(() {
+                                  
                                   if(_customIcon){
                                     _height += 200;
                                     _maxLines += 12;
@@ -144,7 +148,10 @@ That a sugar. (اشتباه)
                           alignment: Alignment.centerRight,
                           child: Row(
                             children: [
-                              IconButton(onPressed: (){},
+                              IconButton(onPressed: (){
+                                Provider.of<NoteData>(context, listen: false).deleteTask(Provider.of<NoteData>(context, listen: false).notes[i]);
+                                print('yes it works');
+                              },
                                   icon: Icon(Icons.delete_outline_outlined, color: Colors.blue.shade800,)),
                               IconButton(onPressed: (){},
                                   icon: Icon(Icons.edit_outlined,
@@ -161,7 +168,14 @@ That a sugar. (اشتباه)
               ),
             );
           }), 
-      floatingActionButton: FloatingActionButton(onPressed: (){}, child: Icon(Icons.add),
+      floatingActionButton: FloatingActionButton(onPressed: (){
+
+        showModalBottomSheet(context: context, builder: (context){
+          return AddNote();
+        });
+        
+        
+      }, child: Icon(Icons.add),
 
         backgroundColor: Colors.blue.shade800,
 
